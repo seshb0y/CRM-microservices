@@ -1,0 +1,37 @@
+﻿version: "3.9"
+
+services:
+  task-db:
+    image: postgres:16
+    container_name: task_postgres
+    environment:
+      POSTGRES_DB: task_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5446:5432"
+    volumes:
+      - task_pgdata:/var/lib/postgresql/data
+    networks:
+      - crm_network
+
+  taskservice:
+    build:
+      context: ./TaskService # путь до папки с Dockerfile TaskService
+    container_name: task_service
+    ports:
+      - "5295:80" # внешний порт 5295 на 80 внутри контейнера
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=task-db;Database=task_db;Username=postgres;Password=secret
+    depends_on:
+      - task-db
+    networks:
+      - crm_network
+
+volumes:
+  task_pgdata:
+
+networks:
+  crm_network:
+    driver: bridge

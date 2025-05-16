@@ -1,0 +1,160 @@
+﻿version: "3.9"
+
+services:
+  twilio-db:
+    image: postgres:16
+    container_name: twilio_postgres
+    environment:
+      POSTGRES_DB: twilio_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5448:5432"  # 👈 проброс наружу
+    volumes:
+      - twilio_pgdata:/var/lib/postgresql/data
+    networks:
+      - crm_network
+  
+  auth-db:
+    image: postgres:16
+    container_name: auth_postgres
+    environment:
+      POSTGRES_DB: auth_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5444:5432"  # 👈 проброс наружу
+    volumes:
+      - auth_pgdata:/var/lib/postgresql/data
+    networks:
+      - crm_network
+
+  client-db:
+    image: postgres:16
+    container_name: client_postgres
+    environment:
+      POSTGRES_DB: client_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5447:5432"  # 👈
+    volumes:
+      - client_pgdata:/var/lib/postgresql/data
+    networks:
+      - crm_network
+
+  order-db:
+    image: postgres:16
+    container_name: order_postgres
+    environment:
+      POSTGRES_DB: order_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5445:5432"  # 👈
+    volumes:
+      - order_pgdata:/var/lib/postgresql/data
+    networks:
+      - crm_network
+
+  task-db:
+    image: postgres:16
+    container_name: task_postgres
+    environment:
+      POSTGRES_DB: task_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5446:5432"  # 👈
+    volumes:
+      - task_pgdata:/var/lib/postgresql/data
+    networks:
+      - crm_network
+  
+  twilioservice:
+    build:
+      context: .
+      dockerfile: TwilioService/TwilioService/Dockerfile
+    depends_on:
+      - twilio-db
+    networks:
+      - crm_network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=twilio-db;Database=twilio_db;Username=postgres;Password=secret
+
+  
+  authservice:
+    build:
+      context: .
+      dockerfile: AuthService/AuthService/Dockerfile
+    depends_on:
+      - auth-db
+    networks:
+      - crm_network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=auth-db;Database=auth_db;Username=postgres;Password=secret
+
+  clientservice:
+    build:
+      context: .
+      dockerfile: ClientService/ClientService/Dockerfile
+    depends_on:
+      - client-db
+    networks:
+      - crm_network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=client-db;Database=client_db;Username=postgres;Password=secret
+
+  orderservice:
+    build:
+      context: .
+      dockerfile: OrderService/OrderService/Dockerfile
+    depends_on:
+      - order-db
+    networks:
+      - crm_network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=order-db;Database=order_db;Username=postgres;Password=secret
+
+  taskservice:
+    build:
+      context: .
+      dockerfile: TaskService/TaskService/Dockerfile
+    depends_on:
+      - task-db
+    networks:
+      - crm_network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=task-db;Database=task_db;Username=postgres;Password=secret
+
+  apigateway:
+    build:
+      context: .
+      dockerfile: ApiGateway/ApiGateway/Dockerfile
+    depends_on:
+      - authservice
+      - clientservice
+      - orderservice
+      - taskservice
+    ports:
+      - "5241:80"
+    networks:
+      - crm_network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+networks:
+  crm_network:
+    driver: bridge
+
+volumes:
+  auth_pgdata:
+  client_pgdata:
+  order_pgdata:
+  task_pgdata:
+  twilio_pgdata:

@@ -1,0 +1,178 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "CRMSolution.Grpc.Orders";
+
+import "google/protobuf/timestamp.proto";
+
+
+
+package order;
+
+enum OrderStatus {
+  NEW = 0;
+  PROCESSING = 1;
+  COMPLETED = 2;
+}
+enum UserRole
+{
+  Admin = 0;
+  Manager = 1;
+}
+enum GrpcTaskStatus
+{
+  New = 0;
+  InProgress = 1;
+  Completed = 2;
+}
+
+service OrderGrpcService {
+  rpc GetOrderById (GetOrderByIdRequest) returns (OrderDto);
+  rpc CreateOrder (CreateOrderRequest) returns (CreateOrderResponse);
+  rpc ChangeOrderData (ChangeOrderDataRequest) returns (ChangeOrderDataResponse);
+  rpc DeleteOrder(DeleteOrderRequest) returns (DeleteOrderResponse);
+  rpc GetOrderFullInfo(GetOrderFullInfoRequest) returns (GetOrderFullInfoResponse);
+  rpc GetLowInfoOrdersList(GetLowInfoOrdersListRequest) returns (GetLowInfoOrdersListResponse);
+  rpc GetOrdersByUserIds (GetOrdersByUserIdsRequest) returns (GetOrdersByUserIdsResponse);
+  rpc ChangeResponsible (ChangeResponsibleRequest) returns (ChangeResponsibleResponse);
+  rpc SaveCallRecord(SaveCallRecordRequest) returns (SaveCallRecordResponse);
+}
+
+message SaveCallRecordResponse{}
+
+message SaveCallRecordRequest{
+  int32 orderId = 1;
+  string recordUrl = 2;
+}
+
+message ChangeResponsibleResponse{
+  int32 userId = 1;
+  int32 orderId = 2;
+}
+message ChangeResponsibleRequest{
+  int32 userId = 1;
+  int32 orderId = 2;
+}
+
+message GetOrdersByUserIdsRequest {
+  repeated int32 userIds = 1;
+}
+message OrderWithUserId {
+  int32 userId = 1;
+  int32 id = 2;
+  double totalAmount = 3;
+  OrderStatus status = 4;
+  int32 clientId = 5;
+  google.protobuf.Timestamp createdAt = 6;
+  
+}
+message GetOrdersByUserIdsResponse {
+  repeated OrderWithUserId orders = 1;
+}
+
+
+message GetOrderByIdRequest {
+  int32 orderId = 1;
+}
+message OrderDto {
+  string id = 1;
+  double totalAmount = 2;
+  string status = 3;
+  int32 userId = 4;
+  int32 clientId = 5;
+}
+
+message ChangeOrderDataRequest {
+  double totalAmount = 1;
+  OrderStatus status = 2;
+  int32 orderId = 3;
+}
+message ChangeOrderDataResponse {
+  double totalAmount = 1;
+  google.protobuf.Timestamp createdAt = 2;
+  OrderStatus status = 3;
+  int32 id = 4;
+}
+
+message CreateOrderRequest{
+  double totalAmount = 1;
+  string clientEmail = 2;
+  string userEmail = 3;
+}
+message CreateOrderResponse{
+  double totalAmount = 1;
+  google.protobuf.Timestamp createdAt = 2;
+  OrderStatus status = 3;
+  int32 id = 4;
+}
+
+message DeleteOrderRequest{
+  int32 orderId = 1;
+}
+message DeleteOrderResponse{
+  bool success = 1;
+  string message = 2;
+}
+
+message GetOrderFullInfoRequest{
+  int32 orderId = 1;
+}
+
+message TaskDto{
+  int32 id = 1;
+  string title = 2;
+  string description = 3;
+  GrpcTaskStatus status = 4;
+  google.protobuf.Timestamp dueDate = 5;
+  int32 orderId = 6;
+}
+message UserDto{
+  int32 id = 1;
+  string username = 2;
+  string email = 3;
+  UserRole role = 4;
+  bool IsEmailConfirmed = 5;
+}
+message ClientDto{
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+  string phone = 4;
+  string address = 5;
+  google.protobuf.Timestamp ClientCreatedAt = 6;
+}
+
+message GetOrderFullInfoResponse{
+
+  ClientDto client = 1;
+
+  int32 OrderId = 2;
+  double OrderTotalAmount = 3;
+  OrderStatus OrderStatus = 4;
+  
+  repeated TaskDto tasks = 5;
+  repeated UserDto users = 6;
+  
+  repeated  string callRecordingUrl = 7;
+}
+
+message SortOrdersRequest{
+  string sortBy = 1;
+  bool descending = 2;
+}
+
+message LowInfoOrder {
+  int32 id = 1;
+  double totalAmount = 2;
+  int32 status = 3;
+  string username = 4;
+  string clientName = 5;
+  google.protobuf.Timestamp createdAt = 6;
+}
+
+message GetLowInfoOrdersListRequest {
+  SortOrdersRequest sort = 1;
+}
+
+message GetLowInfoOrdersListResponse {
+  repeated LowInfoOrder orders = 1;
+}

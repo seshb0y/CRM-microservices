@@ -1,0 +1,33 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+option csharp_namespace = "CRMSolution.Grpc.Twilio";
+
+package twilio;
+
+service TwilioGrpcService {
+  rpc MakeCall (MakeCallRequest) returns (MakeCallResponse);
+  rpc GetRecordingUrl(GetRecodingUrlRequest) returns (GetRecordingUrlResponse);
+  rpc SaveCallRecording(SaveCallRecordingRequest) returns (SaveCallRecordingResponse);
+}
+message MakeCallRequest{
+  string to = 1;
+}
+message MakeCallResponse{
+  string callSid = 1;
+}
+
+message GetRecodingUrlRequest{
+  string callSid = 1;
+}
+message GetRecordingUrlResponse{
+  string recordingUrl = 1;
+}
+
+message SaveCallRecordingRequest{
+  string callSid = 1;
+  int32 orderId = 2;
+}
+message SaveCallRecordingResponse{
+  string message = 1;
+}

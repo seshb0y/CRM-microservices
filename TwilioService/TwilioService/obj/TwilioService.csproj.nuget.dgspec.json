@@ -1,0 +1,248 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\seshb\\OneDrive\\Рабочий стол\\Rep\\Step\\ASP\\CRM microservices architecture\\crm-microservices\\TwilioService\\TwilioService\\TwilioService.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\seshb\\OneDrive\\Рабочий стол\\Rep\\Step\\ASP\\CRM microservices architecture\\crm-microservices\\Crm.Grpc.Contracts\\Crm.Grpc.Contracts\\Crm.Grpc.Contracts.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\seshb\\OneDrive\\Рабочий стол\\Rep\\Step\\ASP\\CRM microservices architecture\\crm-microservices\\Crm.Grpc.Contracts\\Crm.Grpc.Contracts\\Crm.Grpc.Contracts.csproj",
+        "projectName": "Crm.Grpc.Contracts",
+        "projectPath": "C:\\Users\\seshb\\OneDrive\\Рабочий стол\\Rep\\Step\\ASP\\CRM microservices architecture\\crm-microservices\\Crm.Grpc.Contracts\\Crm.Grpc.Contracts\\Crm.Grpc.Contracts.csproj",
+        "packagesPath": "C:\\Users\\seshb\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\seshb\\OneDrive\\Рабочий стол\\Rep\\Step\\ASP\\CRM microservices architecture\\crm-microservices\\Crm.Grpc.Contracts\\Crm.Grpc.Contracts\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\seshb\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Google.Protobuf": {
+              "target": "Package",
+              "version": "[3.25.1, )"
+            },
+            "Grpc.Net.Client": {
+              "target": "Package",
+              "version": "[2.63.0, )"
+            },
+            "Grpc.Tools": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.63.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.406/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\seshb\\OneDrive\\Рабочий стол\\Rep\\Step\\ASP\\CRM microservices architecture\\crm-microservices\\TwilioService\\TwilioService\\TwilioService.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\seshb\\OneDrive\\Рабочий стол\\Rep\\Step\\ASP\\CRM microservices architecture\\crm-microservices\\TwilioService\\TwilioService\\TwilioService.csproj",
+        "projectName": "TwilioService",
+        "projectPath": "C:\\Users\\seshb\\OneDrive\\Рабочий стол\\Rep\\Step\\ASP\\CRM microservices architecture\\crm-microservices\\TwilioService\\TwilioService\\TwilioService.csproj",
+        "packagesPath": "C:\\Users\\seshb\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\seshb\\OneDrive\\Рабочий стол\\Rep\\Step\\ASP\\CRM microservices architecture\\crm-microservices\\TwilioService\\TwilioService\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\seshb\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\seshb\\OneDrive\\Рабочий стол\\Rep\\Step\\ASP\\CRM microservices architecture\\crm-microservices\\Crm.Grpc.Contracts\\Crm.Grpc.Contracts\\Crm.Grpc.Contracts.csproj": {
+                "projectPath": "C:\\Users\\seshb\\OneDrive\\Рабочий стол\\Rep\\Step\\ASP\\CRM microservices architecture\\crm-microservices\\Crm.Grpc.Contracts\\Crm.Grpc.Contracts\\Crm.Grpc.Contracts.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "AutoFixture": {
+              "target": "Package",
+              "version": "[4.18.1, )"
+            },
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
+            "Bogus": {
+              "target": "Package",
+              "version": "[35.6.2, )"
+            },
+            "FluentAssertions": {
+              "target": "Package",
+              "version": "[8.2.0, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[11.3.0, )"
+            },
+            "Grpc.AspNetCore": {
+              "target": "Package",
+              "version": "[2.71.0, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.11.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.12, )"
+            },
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[8.0.12, )"
+            },
+            "Microsoft.AspNetCore.SignalR.Client": {
+              "target": "Package",
+              "version": "[8.0.12, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.12, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.12, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.12, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.12, )"
+            },
+            "Microsoft.IdentityModel.JsonWebTokens": {
+              "target": "Package",
+              "version": "[8.4.0, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.20.72, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[8.0.3, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.6.2, )"
+            },
+            "Swashbuckle.AspNetCore.Swagger": {
+              "target": "Package",
+              "version": "[6.6.2, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.4.0, )"
+            },
+            "Twilio": {
+              "target": "Package",
+              "version": "[7.9.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.9.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.406/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

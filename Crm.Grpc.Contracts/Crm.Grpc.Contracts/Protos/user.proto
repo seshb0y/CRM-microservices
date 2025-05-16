@@ -1,0 +1,260 @@
+syntax = "proto3";
+
+option csharp_namespace = "CRMSolution.Grpc.Users";
+import "google/protobuf/timestamp.proto";
+
+package users;
+
+enum UserRole
+{
+    Admin = 0;
+    Manager = 1;
+}
+
+enum GrpcTaskStatus {
+  New = 0;
+  InProgress = 1;
+  Completed = 2;
+}
+
+enum OrderStatus {
+  NEW = 0;
+  PROCESSING = 1;
+  COMPLETED = 2;
+}
+
+service UserService {
+  rpc FindUser (GetUserByEmailRequest) returns (FindUserResponse);
+  rpc GetUserByUsername (GetUserByEmailRequest) returns (GetUserResponse);
+  rpc GetUserById (GetUserByIdRequest) returns (GetUserResponse);
+  rpc GetUsersByIds (GetUsersByIdsRequest) returns (GetUsersByIdsResponse);
+  
+  rpc Register(RegisterRequest) returns (RegisterResponse);
+  rpc ConfirmEmail(ConfirmRequest) returns (ConfirmResponse);
+  rpc VerifyEmail(VerifyEmailRequest) returns (DefaultResponse);
+  rpc ResetPassword(ResetPasswordRequest) returns (DefaultResponse);
+  rpc ChangePassword(ChangePasswordRequest) returns (DefaultResponse);
+  rpc GetCurrentUser(DefaultRequest) returns (CurrentUserResponse);
+  rpc SendEmail(SendEmailRequest) returns (DefaultResponse);
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse);
+  rpc Logout(DefaultRequest) returns (DefaultResponse);
+  
+  rpc GetNameFromToken(GetNameFromTokenRequest) returns (GetNameFromTokenResponse);
+  rpc CreateToken(CreateTokenRequest) returns (CreateTokenResponse);
+  rpc CreateEmailToken (CreateTokenRequest) returns (CreateTokenResponse);
+  rpc ValidateEmailToken(ValidateTokenRequest) returns (ValidateTokenResponse);
+  rpc CreateResetPasswordToken(CreateTokenRequest) returns (CreateTokenResponse);
+  rpc ValidatePasswordTokenAsync(ValidateTokenRequest) returns (ValidateTokenResponse);
+  
+  rpc ChangeUserData(ChangeUserDataRequest) returns (ChangeUserDataResponse);
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
+  rpc GetAllUsers(GetAllUsersRequest) returns (GetAllUsersResponse);
+}
+
+message DeleteUserResponse{
+  int32 userId = 1;
+}
+
+message SortUsersRequest{
+  string sortBy = 1;
+  bool descending = 2;
+}
+
+message TaskInfo {
+  int32 taskId = 1;
+  string title = 2;
+  string description = 3;
+  GrpcTaskStatus taskStatus = 4;
+  google.protobuf.Timestamp dueDate = 5;
+}
+
+message OrderInfo {
+  int32 orderId = 1;
+  double totalAmount = 2;
+  OrderStatus orderStatus = 3;
+}
+
+message UserInfo {
+  int32 userId = 1;
+  string username = 2;
+  string email = 3;
+  UserRole userRole = 4;
+  bool IsEmailConfirmed = 5;
+
+  repeated TaskInfo tasks = 6;
+  repeated OrderInfo orders = 7;
+  
+  google.protobuf.Timestamp createdAt = 8;
+}
+
+message GetAllUsersRequest {
+  SortUsersRequest sort = 1;
+}
+
+message GetAllUsersResponse {
+  repeated UserInfo users = 1;
+}
+
+
+message DeleteUserRequest{
+  string email = 1;
+}
+
+message ChangeUserDataResponse{
+  int32 id = 1;
+  string username = 2;
+  string email = 3;
+  UserRole role = 4;
+  google.protobuf.Timestamp createdAt = 5;
+}
+
+message ChangeUserDataRequest{
+  string username = 1;
+  string newEmail = 2;
+  string oldEmail = 3;
+  UserRole role = 4;
+}
+
+message ValidateTokenResponse{
+  bool isValidate = 1;
+}
+
+message ValidateTokenRequest{
+  string token = 1;
+}
+
+message CreateTokenResponse{
+  string token = 1;
+}
+
+message CreateTokenRequest{
+  string username = 1;
+}
+
+message GetNameFromTokenResponse{
+  string username = 1;
+}
+
+message GetNameFromTokenRequest{
+  string token = 1;
+}
+
+message RefreshTokenResponse{
+  string accessToken = 1;
+  string refreshToken = 2;
+}
+message RefreshTokenRequest {
+}
+
+message LoginResponse{
+  string accessToken = 1;
+  string refreshToken = 2;
+}
+
+message LoginRequest{
+  string username = 1;
+  string password = 2;
+}
+
+message SendEmailRequest{
+  string to = 1;
+  string subject = 2;
+  string html = 3;
+}
+
+message CurrentUserResponse{
+  int32 id = 1;
+  string username = 2;
+  UserRole role = 3;
+  bool isEmailConfirmed = 4;
+  string email = 5;
+}
+
+message DefaultRequest{
+  string message = 1;
+}
+
+message ChangePasswordRequest{
+  string newPassword = 1;
+}
+
+message ResetPasswordRequest{
+  string username = 1;
+}
+
+message VerifyEmailRequest{}
+
+message ConfirmResponse{
+  string username = 1;
+}
+message ConfirmRequest{
+  string username = 1;
+}
+
+message RegisterResponse{
+  int32 id = 1;
+  string email = 2;
+  string username = 3;
+  google.protobuf.Timestamp createdAt = 4;
+  UserRole role = 5;
+}
+message RegisterRequest{
+  string username = 1;
+  string password = 2;
+  string confirmPassword = 3;
+  string email = 4;
+}
+
+message DefaultResponse{
+  bool success = 1;
+  string message = 2;
+}
+
+message GetUsersByIdsRequest {
+  repeated int32 ids = 1;
+}
+
+message GetUsersByIdsResponse {
+  repeated string Usernames = 1;
+}
+
+message GetUserByEmailRequest {
+  string email = 1;
+  int32 orderId = 2;
+}
+message GetUserByIdRequest {
+  int32 id = 1;
+}
+
+
+message GetUserResponse {
+  int32 id = 1;
+  string username = 2;
+  string email = 3;
+  UserRole role = 4;
+  bool IsEmailConfirmed = 5;
+}
+
+message FindUserResponse {
+  repeated FindUserClientsResponse clients = 1;
+  repeated FindUserOrdersResponse orders = 2;
+  repeated FindUserTasksResponse tasks = 3;
+}
+
+message FindUserClientsResponse {
+  string clientName = 1;
+}
+
+message FindUserOrdersResponse {
+  string orderId = 1;
+  double totalAmount = 2;
+  string status = 3;
+}
+
+message FindUserTasksResponse {
+  string taskId = 1;
+  string title = 2;
+  string status = 3;
+}
+

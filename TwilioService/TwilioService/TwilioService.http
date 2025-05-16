@@ -1,0 +1,6 @@
+@TwilioService_HostAddress = http://localhost:5299
+
+GET {{TwilioService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

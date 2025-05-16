@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "HNJUmoH73/0=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\seshb\\OneDrive\\Рабочий стол\\Rep\\Step\\ASP\\CRM microservices architecture\\crm-microservices\\Crm.Grpc.Contracts\\Crm.Grpc.Contracts\\Crm.Grpc.Contracts.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\seshb\\.nuget\\packages\\google.protobuf\\3.25.1\\google.protobuf.3.25.1.nupkg.sha512",
+    "C:\\Users\\seshb\\.nuget\\packages\\grpc.core.api\\2.63.0\\grpc.core.api.2.63.0.nupkg.sha512",
+    "C:\\Users\\seshb\\.nuget\\packages\\grpc.net.client\\2.63.0\\grpc.net.client.2.63.0.nupkg.sha512",
+    "C:\\Users\\seshb\\.nuget\\packages\\grpc.net.common\\2.63.0\\grpc.net.common.2.63.0.nupkg.sha512",
+    "C:\\Users\\seshb\\.nuget\\packages\\grpc.tools\\2.63.0\\grpc.tools.2.63.0.nupkg.sha512",
+    "C:\\Users\\seshb\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
